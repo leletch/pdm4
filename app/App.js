@@ -3,8 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignUpScreen from './SignUpScreen'; 
-import MainScreen from './MainScreen';
+import SignUpScreen from './SignUpScreen'; // Importando a tela de cadastro
 
 
 const Stack = createNativeStackNavigator();
@@ -12,15 +11,15 @@ const Stack = createNativeStackNavigator();
 function LoginScreen({ navigation }) {
   return (
     <ImageBackground source={require('./assets/fundo.png')} style={styles.background}>
-      {/* Seção de boas-vindas no canto esquerdo */}
+      
       <View style={styles.welcomeContainer}>
         <Text style={styles.text}>Welcome</Text>
         <Text style={styles.text}>Back!</Text>
       </View>
 
-      {/* Seção de login na parte inferior */}
+ 
       <View style={styles.loginContainer}>
-        {/* Campo de Email */}
+      
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -28,28 +27,28 @@ function LoginScreen({ navigation }) {
           keyboardType="email-address"
         />
 
-        {/* Campo de Senha */}
+       
         <TextInput
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#aaa"
-          secureTextEntry={true} 
+          secureTextEntry={true} // Oculta o texto (modo senha)
         />
 
-        {/* Botão de Logar */}
-        <TouchableOpacity style={styles.button}
-         onPress={() => navigation.navigate('Login')}
-         >
+      
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Main')} // Navega para a tela "Main"
+        >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
-        {/* Texto "ou" entre os botões */}
+      
         <Text style={styles.orText}>or</Text>
 
-        {/* Botão de Cadastro */}
         <TouchableOpacity 
           style={styles.transparentButton}
-          onPress={() => navigation.navigate('SignUp')} 
+          onPress={() => navigation.navigate('SignUp')} // Navega para a tela de cadastro
         >
           <Text style={styles.transparentButtonText}>Sign up</Text>
         </TouchableOpacity>
@@ -60,12 +59,21 @@ function LoginScreen({ navigation }) {
   );
 }
 
+function MainScreen() {
+  return (
+    <View style={styles.mainContainer}>
+      <Text style={styles.mainText}>Tela main :)</Text>
+    </View>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={MainScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -93,7 +101,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
-    fontSize: 24,
+    fontSize: 30,
     marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'left',
@@ -103,7 +111,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 15,
-    fontSize: 18,
+    fontSize: 15,
     borderColor: '#ccc',
     borderWidth: 1,
   },
@@ -137,6 +145,15 @@ const styles = StyleSheet.create({
   transparentButtonText: {
     color: '#4300dd',
     fontSize: 18,
+    fontWeight: 'bold',
+  },
+  mainContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mainText: {
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });

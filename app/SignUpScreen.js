@@ -11,21 +11,21 @@ export default function SignUpScreen() {
       </View>
 
       <View style={styles.container}>
-        {/* Campo de Nome Completo */}
+       
         <TextInput
           style={styles.input}
           placeholder="Full Name"
           placeholderTextColor="#aaa"
         />
 
-        {/* Campo de RA */}
+     
         <TextInput
           style={styles.input}
           placeholder="RA"
           placeholderTextColor="#aaa"
         />
 
-        {/* Campo de Email */}
+     
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -33,23 +33,23 @@ export default function SignUpScreen() {
           keyboardType="email-address"
         />
 
-        {/* Campo de Senha */}
+       
         <TextInput
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#aaa"
-          secureTextEntry={true} // Oculta o texto (modo senha)
+          secureTextEntry={true} 
         />
 
-        {/* Campo de Confirmar Senha */}
+       
         <TextInput
           style={styles.input}
           placeholder="Confirm Password"
           placeholderTextColor="#aaa"
-          secureTextEntry={true} // Oculta o texto (modo senha)
+          secureTextEntry={true} 
         />
 
-        {/* Botão de Cadastro */}
+      
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20, 
   },
   text: {
-    fontSize: 24, 
+    fontSize: 30, 
     fontWeight: 'bold', 
     color: '#fff',
   },
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 15,
-    fontSize: 18,
+    fontSize: 15,
     borderColor: '#ccc',
     borderWidth: 1,
     width: '80%', 
