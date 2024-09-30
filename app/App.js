@@ -1,73 +1,43 @@
 import React from 'react';
+import React, {useEffect, useState} from 'react'
+import auth, {FirebaseAuthTypes} from "@react-native-firebase/auth"
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignUpScreen from './SignUpScreen'; // Importando a tela de cadastro
+import SignUpScreen from './src/screens/SignUp/SignUpScreen'; // Importando a tela de cadastro
+import LoginScreen from "./src/screens/Login/LoginScreen";
 
 
 const Stack = createNativeStackNavigator();
 
-function LoginScreen({ navigation }) {
-  return (
-    <ImageBackground source={require('./assets/fundo.png')} style={styles.background}>
-      
-      <View style={styles.welcomeContainer}>
-        <Text style={styles.text}>Welcome</Text>
-        <Text style={styles.text}>Back!</Text>
+
+export default function App(){
+  const [user,setUser] = useState<FirebaseAuthTypes.User | null>(null);
+  const [initializing, setInitializing] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged(_user => {
+      if (initializing) {
+        setInitializing(false);
+      }
+      setUser(_user);
+    });
+
+    return unsubscribe;
+  }, [initializing]);
+
+  if (initializing) {
+    return (
+      <View>
+        <ActivityIndicator color={colors.primary} />
       </View>
+    );
+  }
+  
+  
 
- 
-      <View style={styles.loginContainer}>
-      
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor="#aaa"
-          keyboardType="email-address"
-        />
 
-       
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#aaa"
-          secureTextEntry={true} // Oculta o texto (modo senha)
-        />
-
-      
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Main')} // Navega para a tela "Main"
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-
-      
-        <Text style={styles.orText}>or</Text>
-
-        <TouchableOpacity 
-          style={styles.transparentButton}
-          onPress={() => navigation.navigate('SignUp')} // Navega para a tela de cadastro
-        >
-          <Text style={styles.transparentButtonText}>Sign up</Text>
-        </TouchableOpacity>
-      </View>
-
-      <StatusBar style="auto" />
-    </ImageBackground>
-  );
-}
-
-function MainScreen() {
-  return (
-    <View style={styles.mainContainer}>
-      <Text style={styles.mainText}>Tela main :)</Text>
-    </View>
-  );
-}
-
-export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">

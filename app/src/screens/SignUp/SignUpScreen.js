@@ -1,7 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
+import styles from "./styles"
+import auth from "@react-native-firebase/auth"
+import React, {useState} from 'react'
 
 export default function SignUpScreen() {
+  
+  const [name, setName] = useState("");
+  const [ra, setRA] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  function signUp(){
+      auth().createUserWithEmailAndPassword(name, ra, email, password, confirmPassword);
+  }
+
+
+
   return (
     <ImageBackground source={require('./assets/fundo2.png')} style={styles.background}>
       {/* Seção de boas-vindas no canto superior esquerdo */}
@@ -16,6 +32,8 @@ export default function SignUpScreen() {
           style={styles.input}
           placeholder="Full Name"
           placeholderTextColor="#aaa"
+          value={name}
+          action={setName}
         />
 
      
@@ -23,6 +41,8 @@ export default function SignUpScreen() {
           style={styles.input}
           placeholder="RA"
           placeholderTextColor="#aaa"
+          value={ra}
+          action={setRA}
         />
 
      
@@ -31,6 +51,8 @@ export default function SignUpScreen() {
           placeholder="Email"
           placeholderTextColor="#aaa"
           keyboardType="email-address"
+          value={email}
+          action={setEmail}
         />
 
        
@@ -39,6 +61,8 @@ export default function SignUpScreen() {
           placeholder="Password"
           placeholderTextColor="#aaa"
           secureTextEntry={true} 
+          value={password}
+          action={setPassword}
         />
 
        
@@ -47,58 +71,15 @@ export default function SignUpScreen() {
           placeholder="Confirm Password"
           placeholderTextColor="#aaa"
           secureTextEntry={true} 
+          value={confirmPassword}
+          action={setConfirmPassword}
         />
 
       
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={signUp} style={styles.button}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    resizeMode: 'cover', 
-  },
-  welcomeContainer: {
-    paddingTop: 150,
-    paddingLeft: 20, 
-  },
-  text: {
-    fontSize: 30, 
-    fontWeight: 'bold', 
-    color: '#fff',
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'flex-end', 
-    alignItems: 'center',
-    paddingBottom: 40,
-    paddingHorizontal: 20, 
-  },
-  input: {
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 15,
-    fontSize: 15,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    width: '80%', 
-  },
-  button: {
-    backgroundColor: '#4300dd', 
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-    width: '80%', 
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
