@@ -1,3 +1,4 @@
+
 # FLUXO FIREBASE
 O fluxo de login usando Firebase Authentication e Firestore envolve a autenticação de usuários e o armazenamento de dados adicionais relacionados a esses usuários. A seguir, detalho o fluxo e a finalidade dos principais serviços envolvidos:
 
@@ -20,7 +21,7 @@ Esse token é armazenado localmente (geralmente no dispositivo do usuário) e po
 # 3. Firestore
 O Firestore é o banco de dados em tempo real do Firebase, utilizado para armazenar dados de aplicativos, como informações de usuários, produtos, mensagens, etc.
 
-# Função do Firestore no fluxo de login:
+# Função do Firestore no fluxo de login
 
 # Armazenamento de dados de usuário
 Após a autenticação bem-sucedida, os dados do usuário (nome, e-mail, foto de perfil, etc.) podem ser armazenados ou recuperados do Firestore. Os dados dos usuários geralmente são armazenados em uma coleção de usuários no Firestore.
@@ -45,3 +46,5 @@ Armazena e gerencia dados dos usuários e outros dados do aplicativo de forma es
 Protege os dados do Firestore, garantindo que apenas usuários autenticados e autorizados possam acessar ou modificar seus próprios dados.
 
 Esse fluxo simplifica a implementação de autenticação e armazenamento de dados em aplicativos, reduzindo a complexidade e aumentando a segurança, além de permitir integração fácil com outros serviços do Firebase.
+
+
